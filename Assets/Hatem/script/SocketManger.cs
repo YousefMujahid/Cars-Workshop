@@ -6,6 +6,7 @@ public class SocketManger : MonoBehaviour
 {
     [SerializeField] XRSocketInteractor[] _socket;
     [SerializeField] GameObject[] _object_part;
+    [SerializeField] GameObject _Car;
     bool[] _check_if_it_right;
     Vector3 _original_part_position;
     bool isSelectFound;
@@ -20,6 +21,13 @@ public class SocketManger : MonoBehaviour
     }
     #endregion
     #region private method
+    IEnumerator DisableAllIntraction(GameObject _object)
+    {
+        yield return new WaitForSeconds(0.5f);
+        _object.GetComponent<XRGrabInteractable>().enabled = false;
+        _object.GetComponent<Rigidbody>().isKinematic = true;
+        _object.transform.SetParent(_Car.transform);
+    }
     void CheckPartValidation(GameObject[] _object, XRSocketInteractor[] _socket)
     {
         for (int i = 0; i < _object.Length; i++)
@@ -29,6 +37,8 @@ public class SocketManger : MonoBehaviour
                 IXRSelectInteractable xRSelect = _socket[i].GetOldestInteractableSelected();
                 if (xRSelect.transform.GetInstanceID() == _object[i].transform.GetInstanceID()) //116948   116574
                 {
+                    _socket[i].showInteractableHoverMeshes = false;
+                    StartCoroutine(DisableAllIntraction(_object[i].gameObject));
                     _check_if_it_right[i] = true;
                 }
                 else
