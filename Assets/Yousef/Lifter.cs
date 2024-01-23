@@ -71,7 +71,7 @@ public class Lifter : MonoBehaviour
         }
         if (isLowerButtonClicked)
         {
-            if (lowering_offest > -1f)
+            if (lowering_offest < 17f)
             {
                 lowering_offest += Time.deltaTime * 2f;
             }

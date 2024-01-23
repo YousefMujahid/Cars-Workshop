@@ -3748,8 +3748,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b189af1ebe02e684887e09b6370ad6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifter: {fileID: 0}
+  _lifter: {fileID: 1265129033}
+  _dodge_charger: {fileID: 3364946658385601322}
   _top_position: {x: 0.00000023842, y: 0.01, z: -0.00000011921}
+  isUpperButtonClicked: 0
+  isLowerButtonClicked: 0
+  raising_time: 0.06
+  raising_offset: 0.5
+  lowering_offest: 0.5
 --- !u!1 &306990637 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1031432010919690497, guid: 441130790586fa94185ea0ca9e82e525,
