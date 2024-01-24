@@ -48,12 +48,14 @@ public class Lifter : MonoBehaviour
     }
     void LowerTheCar(float offest)
     {
+        
+
         _lifter.transform.position = Vector3.Lerp(_lifter_last_position,
-            new Vector3(_lifter_last_position.x, _lifter_last_position.y - offest, _lifter_last_position.z),
+            new Vector3(_lifter_last_position.x, _lifter_last_position.y + offest, _lifter_last_position.z),
             raising_time);
 
         _dodge_charger.transform.position = Vector3.Lerp(_dodge_charger_last_position,
-            new Vector3(_dodge_charger_last_position.x, _dodge_charger_last_position.y - offest, _dodge_charger_last_position.z),
+            new Vector3(_dodge_charger_last_position.x, _dodge_charger_last_position.y + offest, _dodge_charger_last_position.z),
             raising_time);
     }
 
@@ -62,21 +64,27 @@ public class Lifter : MonoBehaviour
        
         if (isUpperButtonClicked)
         {
-            if (raising_offset < 18f)
+            if (raising_offset < 5f)
             {
                 raising_offset += Time.deltaTime * 2f;
             }
+            
             RaiseTheCar(raising_offset);
 
         }
         if (isLowerButtonClicked)
         {
-            if (lowering_offest > -1f)
+            if (_lifter_last_position != _lifter_position)
             {
-                lowering_offest += Time.deltaTime * 2f;
+                raising_offset -= Time.deltaTime * 2f;
+
             }
 
-            LowerTheCar(lowering_offest);
+            if (raising_offset < 0.02f)
+            {
+                raising_offset = 0.02f;
+            }
+            LowerTheCar(raising_offset-5);
         }
     }
 }
