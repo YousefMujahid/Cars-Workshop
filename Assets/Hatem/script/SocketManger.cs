@@ -9,7 +9,7 @@ public class SocketManger : MonoBehaviour
     [SerializeField] GameObject _Car;
     bool[] _check_if_it_right;
     Vector3 _original_part_position;
-    bool isSelectFound;
+    public bool IsAllPartAssembled;
     #region unity method
     void Start()
     {
@@ -28,6 +28,17 @@ public class SocketManger : MonoBehaviour
         _object.GetComponent<Rigidbody>().isKinematic = true;
         _object.transform.SetParent(_Car.transform);
     }
+    bool CheckAllPaetIsAssembled(bool[] check)
+    {
+        for (int i = 0; i < check.Length; i++)
+        {
+            if (!check[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     void CheckPartValidation(GameObject[] _object, XRSocketInteractor[] _socket)
     {
         for (int i = 0; i < _object.Length; i++)
@@ -40,6 +51,7 @@ public class SocketManger : MonoBehaviour
                     _socket[i].showInteractableHoverMeshes = false;
                     StartCoroutine(DisableAllIntraction(_object[i].gameObject));
                     _check_if_it_right[i] = true;
+                    IsAllPartAssembled = CheckAllPaetIsAssembled(_check_if_it_right);
                 }
                 else
                 {
