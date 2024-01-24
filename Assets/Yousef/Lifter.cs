@@ -6,8 +6,9 @@ public class Lifter : MonoBehaviour
 {
     [SerializeField] GameObject _lifter;
     [SerializeField] GameObject _dodge_charger;
-    [SerializeField] Vector3 _top_position;
-
+    [SerializeField] AudioSource _audio;
+    [SerializeField] AudioClip _lifting_audio_clip;
+    [SerializeField] AudioClip _finish_liffting_clip;
 
     Vector3 _lifter_position;
     Vector3 _dodge_charger_position;
@@ -32,21 +33,28 @@ public class Lifter : MonoBehaviour
     public void make_upper_button_on()
     {
         isUpperButtonClicked = true;
-
+        _audio.PlayOneShot(_lifting_audio_clip, .7f);
 
     }
     public void make_upper_button_off()
     {
         isUpperButtonClicked = false;
+        _audio.Stop();
+        _audio.PlayOneShot(_finish_liffting_clip, .7f);
 
     }
     public void make_lower_button_on()
     {
         isLowerButtonClicked = true;
+        _audio.PlayOneShot(_lifting_audio_clip, .7f);
+
     }
     public void make_lower_button_off()
     {
         isLowerButtonClicked = false;
+        _audio.Stop();
+        _audio.PlayOneShot(_finish_liffting_clip, .7f);
+
 
     }
     void RaiseTheCar(float offest)
