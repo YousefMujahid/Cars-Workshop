@@ -7,15 +7,17 @@ public class Lifter : MonoBehaviour
     [SerializeField] GameObject _lifter;
     [SerializeField] GameObject _dodge_charger;
     [SerializeField] Vector3 _top_position;
+
+
     Vector3 _lifter_position;
     Vector3 _dodge_charger_position;
     Vector3 _lifter_last_position;
     Vector3 _dodge_charger_last_position;
+
+    private float _new_offest;
+
     public bool isUpperButtonClicked;
     public bool isLowerButtonClicked;
-
-
-
     public float raising_time;
     public float raising_offset;
     public float lowering_offest;
@@ -27,10 +29,25 @@ public class Lifter : MonoBehaviour
 
     }
 
-    public bool check_if_button_is_clicked()
+    public void make_upper_button_on()
     {
+        isUpperButtonClicked = true;
 
-        return isUpperButtonClicked = true;
+
+    }
+    public void make_upper_button_off()
+    {
+        isUpperButtonClicked = false;
+
+    }
+    public void make_lower_button_on()
+    {
+        isLowerButtonClicked = true;
+    }
+    public void make_lower_button_off()
+    {
+        isLowerButtonClicked = false;
+
     }
     void RaiseTheCar(float offest)
     {
@@ -68,23 +85,22 @@ public class Lifter : MonoBehaviour
             {
                 raising_offset += Time.deltaTime * 2f;
             }
-
+            _new_offest = raising_offset;
             RaiseTheCar(raising_offset);
 
         }
         if (isLowerButtonClicked)
         {
-            if (_lifter_last_position != _lifter_position)
-            {
-                raising_offset -= Time.deltaTime * 2f;
+           
+            raising_offset -= Time.deltaTime * 2f;
 
-            }
 
+            LowerTheCar(raising_offset - _new_offest);
             if (raising_offset < 0.02f)
             {
                 raising_offset = 0.02f;
             }
-            LowerTheCar(raising_offset - 5);
+            
         }
     }
 }
