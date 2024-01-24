@@ -6,7 +6,7 @@ public class ColorPreview : MonoBehaviour
 {
     public Graphic previewGraphic;
     public ColorPicker colorPicker;
-    public GameObject tip;
+    public CustomCarColor carColor;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class ColorPreview : MonoBehaviour
     public void OnColorChanged(Color c)
     { 
         previewGraphic.color = c;
-        tip.gameObject.GetComponent<Renderer>().material.color = c;
+        carColor._CarMaterial.color = c;
     }
 
     private void OnDestroy()
