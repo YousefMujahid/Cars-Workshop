@@ -17,7 +17,7 @@ public class ColorPreview : MonoBehaviour
     public void OnColorChanged(Color c)
     { 
         previewGraphic.color = c;
-        carColor._CarMaterial.color = c;
+        carColor._CarMaterial.SetColor(carColor.IsFristColor ? "_Color1" : "_Color2", c);
     }
 
     private void OnDestroy()

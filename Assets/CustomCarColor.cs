@@ -13,6 +13,7 @@ public class CustomCarColor : MonoBehaviour
     [SerializeField] SocketManger _SocketManger;
     [SerializeField] int _Angle;
     public Material _CarMaterial;
+    public bool IsFristColor { get; set; }
     #endregion
     #region unity method
     void Start()
@@ -20,7 +21,7 @@ public class CustomCarColor : MonoBehaviour
         _MetallicSlider.maxValue = 1;
         _SmoothnesSlider.maxValue = 1;
         _MetallicSlider.value = _CarMaterial.GetFloat("_Metallic");
-        _SmoothnesSlider.value = _CarMaterial.GetFloat("_Smoothness");
+        _SmoothnesSlider.value = _CarMaterial.GetFloat("_Smoothnes");
         _SmoothnesSlider.onValueChanged.AddListener(delegate { SmoothnesAdjust(); });
         _MetallicSlider.onValueChanged.AddListener(delegate { MetallicAdjust(); });
     }
